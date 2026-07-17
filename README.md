@@ -70,3 +70,25 @@ node build.js ../index.html
 
 *(A note on the brief: "base 63" was interpreted as base64 — the standard binary-to-text
 encoding: each tile is exactly 44 base64 characters.)*
+
+---
+
+# TINY WEST: RAMPAGE EXPRESS — 42-second vertical slice 🐎💰
+
+The repo also contains the **current production direction**: a deterministic
+480×270 arcade slice built from the [Tiny West Brain](docs/tiny-west-brain/README.md)
+canon (`CHASE → BOARD → BLAST → CASH → RETURN → ESCAPE`).
+
+**Play it:** open [`slice/dist/tiny-west.html`](slice/dist/tiny-west.html) — one offline file.
+
+![chase](docs/s1_chase.png)
+
+- Chase the train, ride the slipstream, hit the 36-frame boarding window (18-frame perfect).
+- Clear the Dynamite Relay (shoot dynamite mid-air, or let it land next to the guard…).
+- Blast two lock pins, grab the cash burst, leap back to your horse — clean, rough, or rope.
+- Bank it, then choose: teal RIDE OUT (×1.25) or the gold PAY CAR ladder (Marshal, ×1.5).
+- Seeded runs (`R` = retry same seed), medals, 3 hearts, 6-shot revolver with active reload.
+
+Controls: arrows/WASD · Z/Space jump · X/J fire · P pause · M sound · 1/2/3 accessibility.
+Dev docs: [`CLAUDE.md`](CLAUDE.md) · constants: [`docs/tiny-west-brain/CONSTANTS.md`](docs/tiny-west-brain/CONSTANTS.md)
+· receipts: [`docs/tiny-west-brain/BUILD_RECEIPT_SLICE.md`](docs/tiny-west-brain/BUILD_RECEIPT_SLICE.md).

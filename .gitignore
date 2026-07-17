@@ -1,3 +1,8 @@
 node_modules/
 dev/assets.js
 dev/index.html
+node_modules/
+slice/node_modules/
+slice/tools/shots/
+slice/tools/previews/
+slice/tools/review_tmp/
