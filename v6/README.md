@@ -7,7 +7,22 @@ artifacts land here because the Drive connector cannot upload multi-MB files
 from the cloud session. The box/Spark stages them into the Brain and re-verifies
 the SHA-256 recorded in the receipt.
 
-## alpha.3.5 — GAME-FEEL JUICE (GOV-77, awaiting Cowork audit + owner approval)
+## alpha.3.6 — PERF/TELEMETRY HUD (GOV-82, awaiting Cowork audit + owner approval)
+
+Delivered under the GOV-80 transport protocol: the Drive Brain receives ONLY
+`82_BUILD_ALPHA3_6.py` (pins source `930f3a15…` and target SHA) + harness +
+receipt; Cowork reproduces the candidate from the script. The copies here are
+the optional git-history record.
+
+| File | Role | SHA-256 |
+| --- | --- | --- |
+| `Tiny-West-Iron-Trail-v6.0.0-alpha.3.6.html` | Candidate (2,472,284 B) | `86157cd0309318db746dc11e17aa50fd001f04459dc23fe10a4614762cfe0daa` |
+| `82_BUILD_ALPHA3_6.py` | Deterministic builder (source+target SHA pinned) | — |
+| `82_ACCEPT_ALPHA3_6.mjs` | Acceptance harness (20 gates) | — |
+| `82_ALPHA3_6_PERFHUD_BUILD_RECEIPT.md` | GOV-82 receipt: identity, gates, baselines, deviations | — |
+| `a36_perf_hud.png` | HUD live screenshot | — |
+
+## alpha.3.5 — GAME-FEEL JUICE (GOV-78 receipt; audited PASS in GOV-81; gate target advanced to `930f3a15…`)
 
 | File | Role | SHA-256 |
 | --- | --- | --- |
