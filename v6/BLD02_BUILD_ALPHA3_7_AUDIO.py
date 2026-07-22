@@ -2,17 +2,21 @@
 """BLD02_BUILD_ALPHA3_7_AUDIO.py — SCAFFOLD (PREP ONLY) for the Tiny West: Iron Trail
 audio-embed candidate (GOV-72 corrected scope; GOV-54 rev 2 architecture; GOV-80 transport).
 
-STATUS: *** NOT RUNNABLE BY DESIGN. *** Three guard pins below are sentinels and the
-script aborts until they are filled, which may happen ONLY after:
-  1. Cowork checks the Audio lane's encode manifest (pin MANIFEST_SHA256 to the
-     checked bytes — the 2026-07-22 draft observed at 211,629 B, sha256
-     5911c4468df6041b9f62b79dbcfa3bcc37ae21796f1552aefc97f8b0840b9f9a, is a DRAFT
-     and is deliberately NOT pinned);
-  2. the owner approves the build and confirms the source/gate target (presumed
-     alpha.3.6 `86157cd0…` per GOV-83 §A — update SRC_* if the gate differs);
-  3. the SFX-52 wiring spec exists and is Cowork-checked (all 121 newly encoded
-     clips are engineKey:null / awaiting_callsite — without wiring, an embed adds
-     zero audible content; assembler rule 1 forbids auto-grouping them).
+STATUS (rev 2, 2026-07-22): *** STILL NOT RUNNABLE — HOLDING FOR OWNER GO. ***
+Progress since rev 1: the encode manifest PASSED Cowork audit and is now PINNED
+(206 clips / 77 families); the gate is CONFIRMED advanced to alpha.3.6
+`86157cd0…`. Remaining before this script may run:
+  1. AUTHORIZATION pin: owner approves the build + confirms version slot
+     (alpha.3.7-audio presumed).
+  2. OGG delivery path: RECOMMENDED — commit the 121 round1_remaining OGGs +
+     manifest to the repo so the cloud lease pulls and assembles (or run this
+     one candidate on the box where the OGGs live). Scaffold takes --ogg-root.
+  3. WIRING_SHA256 pin: Cowork-checked wiring JSON covering the owner-cleared
+     scope — 43 clean new families (6 gate-ext + 1 fill cue004→reloadSpin +
+     36 new events) + carry the 85 embedded. The three DOUBLE-BOOKED cues
+     006 (player.reload.revolver) / 073 (horse.landing) / 100 (destruction.crate)
+     are DEFERRED pending owner ruling and hard-blocked by guard_deferred()
+     until DEFER_RULING carries the ruling text.
 
 Architecture per GOV-54 rev 2 + the shipped alpha.3.2 embed (GOV-58 audited):
   - ENCODE-ONCE upstream: the Audio lane produced the OGGs (ffmpeg 6.0 libvorbis
@@ -57,9 +61,14 @@ import argparse, base64, hashlib, json, pathlib, re, sys
 
 # ----- GUARD PINS (sentinels: script aborts until legitimately filled) -----
 AUTHORIZATION   = "UNAUTHORIZED"  # e.g. "OWNER-APPROVED 2026-07-xx per <Brain doc>"
-MANIFEST_SHA256 = "UNPINNED"      # sha256 of the Cowork-CHECKED manifest bytes
+# Manifest PASSED Cowork audit (owner relay 2026-07-22): pinned.
+MANIFEST_SHA256 = "5911c4468df6041b9f62b79dbcfa3bcc37ae21796f1552aefc97f8b0840b9f9a"
 WIRING_SHA256   = "UNPINNED-OR-NONE"  # sha256 of the Cowork-checked wiring JSON, or "NONE" for embed-only
-# Source = current gate target (PRESUMED alpha.3.6 per GOV-83 §A; confirm at authorization):
+# Owner ruling pending on the three DOUBLE-BOOKED cues — wiring them is blocked
+# until this pin carries the ruling (e.g. "RULED 2026-07-xx per <doc>: 006=..., 073=..., 100=..."):
+DEFERRED_CUE_IDS = {"006", "073", "100"}   # player.reload.revolver / horse.landing / destruction.crate
+DEFER_RULING     = "PENDING-OWNER-RULING"
+# Source = current gate target (CONFIRMED alpha.3.6 — gate advanced to 86157cd0, owner relay 2026-07-22):
 SRC_FILE  = "Tiny-West-Iron-Trail-v6.0.0-alpha.3.6.html"
 SRC_SHA   = "86157cd0309318db746dc11e17aa50fd001f04459dc23fe10a4614762cfe0daa"
 SRC_BYTES = 2472284
@@ -130,6 +139,12 @@ def load_wiring(args):
                     if rx.search(ek["gate"]): abort(f"gate for '{ek['engineKey']}' contains forbidden pattern: {name}")
     return w
 
+def guard_deferred(c):
+    """Owner ruling gate: the three double-booked cues may not be wired until ruled."""
+    if c["cueId"] in DEFERRED_CUE_IDS and DEFER_RULING == "PENDING-OWNER-RULING":
+        abort(f"cue {c['cueId']} ({c['manifestKey']}) is DOUBLE-BOOKED and deferred pending owner "
+              f"ruling — remove it from the wiring spec or set DEFER_RULING to the ruling text")
+
 def plan_clips(m, w):
     by_manifest_key = {}
     for c in m["clips"]:
@@ -148,6 +163,7 @@ def plan_clips(m, w):
             for mk in ext["manifestKeys"]:
                 if mk not in by_manifest_key: abort(f"extendKeys manifestKey '{mk}' not in manifest")
                 for c in by_manifest_key[mk]:
+                    guard_deferred(c)
                     assign.setdefault(ek, []).append(c)
                     if c in excluded: excluded.remove(c)
         for new in w.get("newEngineKeys", []):
@@ -157,6 +173,7 @@ def plan_clips(m, w):
             for mk in new["manifestKeys"]:
                 if mk not in by_manifest_key: abort(f"newEngineKeys manifestKey '{mk}' not in manifest")
                 for c in by_manifest_key[mk]:
+                    guard_deferred(c)
                     assign.setdefault(ek, []).append(c)
                     if c in excluded: excluded.remove(c)
             if new.get("gate"): gates.append((ek, new["gate"]))
