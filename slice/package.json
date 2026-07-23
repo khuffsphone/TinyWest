@@ -1,0 +1,17 @@
+{
+  "name": "tiny-west-slice",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Build and QA tooling for the Tiny West: Rampage Express 42-second vertical slice",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "sprites:preview": "node tools/sprites.mjs preview",
+    "sprites:emit": "node tools/sprites.mjs emit",
+    "playtest": "node tools/playtest.mjs",
+    "qa2": "node tools/qa2.mjs",
+    "qa3": "node tools/qa3.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}
