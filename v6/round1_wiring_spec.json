@@ -1,0 +1,878 @@
+{
+ "spec": "Round-1 remaining families - wiring proposals for the game-build lease",
+ "author": "TW-Audio lane (LOCAL box), 2026-07-22. PROPOSALS ONLY - the game-build lease owns all call-site decisions and code; this lane never edits the game html.",
+ "basis": "Engine facts from tools/audio/receipts/54_ALPHA3_2_MAPPING_TABLE.md + alpha3_2_callsite_mapping.json (AUDIO_CUES line 1341, weapon ternaries, GATE mechanism). Verify every key/dispatch against the current gate-target candidate before coding.",
+ "parityContract": "Unchanged from GOV-58/doc 54: read-only emits, audio state outside getSimulationState, audio-local PRNG (audioRand) only, no G.* writes, no gameplay timing driven by audio, gamepad guard preserved, tick parity audio-off AND audio-on.",
+ "wiringClasses": {
+  "EXTEND_GATE": "existing engine key; extend the alpha3_2 GATE mechanism to per-weapon/per-surface sample tables - no new dispatch",
+  "EXISTING_KEY": "engine key already fires procedurally with no sample family - direct assignment",
+  "NEW_EVENT": "needs a new read-only dispatch at an existing gameplay event",
+  "DECISION": "double-booking/design question - owner or game-build ruling before wiring"
+ },
+ "counts": {
+  "families": 46,
+  "EXTEND_GATE": 6,
+  "EXISTING_KEY": 1,
+  "NEW_EVENT": 36,
+  "DECISION": 3
+ },
+ "families": [
+  {
+   "cueId": "003",
+   "manifestKey": "player.fire.revolver_fan",
+   "tier": 1,
+   "tierName": "weapons-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2
+   ],
+   "oggBytes": 32723,
+   "proposedEngineKey": "shotFan",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "rapid sequential revolver fire (fan-fire input pattern, if/when the mechanic lands)",
+   "gateProposal": "G.weapon.id==='REVOLVER'",
+   "note": "No fan-fire mechanic identified in alpha.3.x; hold clip until the mechanic exists or route as rare shot variant (owner call)."
+  },
+  {
+   "cueId": "004",
+   "manifestKey": "weapon.revolver.cylinder_spin",
+   "tier": 1,
+   "tierName": "weapons-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    3,
+    4,
+    5
+   ],
+   "oggBytes": 40143,
+   "proposedEngineKey": "reloadSpin",
+   "wiringClass": "EXISTING_KEY",
+   "dispatchProposal": "already invoked: playCustom(reloadFlash>=24?reloadClose:reloadSpin) on reload completion",
+   "gateProposal": "G.weapon.id==='REVOLVER'",
+   "note": "Engine key reloadSpin currently has NO sample family (54_ALPHA3_2_MAPPING_TABLE \"Stay PROCEDURAL: reloadSpin\"). Cue 004 cylinder-spin is its natural fill."
+  },
+  {
+   "cueId": "005",
+   "manifestKey": "weapon.revolver.hammer_cock",
+   "tier": 1,
+   "tierName": "weapons-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    2,
+    4,
+    5
+   ],
+   "oggBytes": 25913,
+   "proposedEngineKey": "hammerCock",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "aim-start / pre-fire telegraph, or deadeye wind-up",
+   "gateProposal": "G.weapon.id==='REVOLVER'",
+   "note": "No current cock event; candidate juice hook."
+  },
+  {
+   "cueId": "006",
+   "manifestKey": "player.reload.revolver",
+   "tier": 1,
+   "tierName": "weapons-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2
+   ],
+   "oggBytes": 36021,
+   "proposedEngineKey": null,
+   "wiringClass": "DECISION",
+   "dispatchProposal": "engine \"reload\" key already = cue 022 (reload-start); assigning 006 would double-book",
+   "gateProposal": null,
+   "note": "Deliberately unmapped in alpha.3.2 (mapping table GATE item 3). Options: replace 022-024 granular sequence with 006 full-reload one-shot, or keep granular and shelve 006."
+  },
+  {
+   "cueId": "008",
+   "manifestKey": "player.fire.rifle",
+   "tier": 1,
+   "tierName": "weapons-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    3
+   ],
+   "oggBytes": 21562,
+   "proposedEngineKey": "shot (rifle sample table)",
+   "wiringClass": "EXTEND_GATE",
+   "dispatchProposal": "existing shot/lastShot ternary",
+   "gateProposal": "G.weapon.id==='RIFLE' (extend the alpha3_2 revolver-only GATE to per-weapon sample tables)",
+   "note": "Same pattern as revolver: gate lifts, per-weapon samples select by G.weapon.id; procedural fallback for weapons without samples."
+  },
+  {
+   "cueId": "009",
+   "manifestKey": "weapon.rifle.lever",
+   "tier": 1,
+   "tierName": "weapons-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    2,
+    3
+   ],
+   "oggBytes": 18695,
+   "proposedEngineKey": "rifleLever",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "rifle post-shot cycle or reload sequence",
+   "gateProposal": "G.weapon.id==='RIFLE'",
+   "note": ""
+  },
+  {
+   "cueId": "010",
+   "manifestKey": "player.reload.rifle",
+   "tier": 1,
+   "tierName": "weapons-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2
+   ],
+   "oggBytes": 44435,
+   "proposedEngineKey": "reload (rifle sample table)",
+   "wiringClass": "EXTEND_GATE",
+   "dispatchProposal": "existing reload dispatch",
+   "gateProposal": "G.weapon.id==='RIFLE'",
+   "note": ""
+  },
+  {
+   "cueId": "011",
+   "manifestKey": "player.fire.shotgun",
+   "tier": 1,
+   "tierName": "weapons-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 37408,
+   "proposedEngineKey": "shot (shotgun sample table)",
+   "wiringClass": "EXTEND_GATE",
+   "dispatchProposal": "existing shot/lastShot ternary",
+   "gateProposal": "G.weapon.id===<sawed-off/shotgun id>",
+   "note": "Confirm exact weapon id in engine (receipt says \"sawed-off\")."
+  },
+  {
+   "cueId": "012",
+   "manifestKey": "player.reload.shotgun",
+   "tier": 1,
+   "tierName": "weapons-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    2,
+    3,
+    4
+   ],
+   "oggBytes": 47229,
+   "proposedEngineKey": "reload (shotgun sample table)",
+   "wiringClass": "EXTEND_GATE",
+   "dispatchProposal": "existing reload dispatch",
+   "gateProposal": "G.weapon.id===<sawed-off/shotgun id>",
+   "note": ""
+  },
+  {
+   "cueId": "013",
+   "manifestKey": "player.empty.shotgun",
+   "tier": 1,
+   "tierName": "weapons-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    5
+   ],
+   "oggBytes": 16017,
+   "proposedEngineKey": "empty (shotgun sample table)",
+   "wiringClass": "EXTEND_GATE",
+   "dispatchProposal": "existing empty-click dispatch (verify engine key name; revolver empty 007 is owner-held)",
+   "gateProposal": "G.weapon.id===<sawed-off/shotgun id>",
+   "note": ""
+  },
+  {
+   "cueId": "014",
+   "manifestKey": "impact.bullet.ricochet",
+   "tier": 2,
+   "tierName": "impacts-feedback",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    5,
+    6
+   ],
+   "oggBytes": 18103,
+   "proposedEngineKey": "ricochet",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "bullet impact on hard surface with miss/deflect outcome",
+   "gateProposal": "audio-local chance roll via audioRand (never G.rng)",
+   "note": ""
+  },
+  {
+   "cueId": "015",
+   "manifestKey": "impact.bullet.flyby",
+   "tier": 2,
+   "tierName": "impacts-feedback",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 25062,
+   "proposedEngineKey": "flyby",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "enemy projectile passing near player without hit",
+   "gateProposal": "proximity check read-only",
+   "note": ""
+  },
+  {
+   "cueId": "016",
+   "manifestKey": "impact.bullet.dirt",
+   "tier": 2,
+   "tierName": "impacts-feedback",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    4,
+    5,
+    6
+   ],
+   "oggBytes": 34482,
+   "proposedEngineKey": "dirt",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "bullet impact vs ground/soft terrain (same family as wood/metal material routing)",
+   "gateProposal": "material of struck surface",
+   "note": "wood/metal already wired; dirt/stone complete the material set."
+  },
+  {
+   "cueId": "019",
+   "manifestKey": "impact.bullet.stone",
+   "tier": 2,
+   "tierName": "impacts-feedback",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    4,
+    5,
+    6
+   ],
+   "oggBytes": 27464,
+   "proposedEngineKey": "stone",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "bullet impact vs rock/stone surfaces",
+   "gateProposal": "material of struck surface",
+   "note": ""
+  },
+  {
+   "cueId": "031",
+   "manifestKey": "impact.iron",
+   "tier": 2,
+   "tierName": "impacts-feedback",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 28946,
+   "proposedEngineKey": "ironImpact",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "heavy metal object hits (train parts, safes)",
+   "gateProposal": "",
+   "note": ""
+  },
+  {
+   "cueId": "032",
+   "manifestKey": "impact.trunk",
+   "tier": 2,
+   "tierName": "impacts-feedback",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 29987,
+   "proposedEngineKey": "trunkImpact",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "tree/timber collision events",
+   "gateProposal": "",
+   "note": ""
+  },
+  {
+   "cueId": "060",
+   "manifestKey": "ui.focus",
+   "tier": 6,
+   "tierName": "ui-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 26566,
+   "proposedEngineKey": "uiFocus",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "menu focus move (currently overloads coin key procedurally)",
+   "gateProposal": "G.mode!=='play'",
+   "note": "alpha3_2 gated coin sample to in-run; menu clicks still play procedural coin. UI family replaces that overload."
+  },
+  {
+   "cueId": "061",
+   "manifestKey": "ui.confirm",
+   "tier": 6,
+   "tierName": "ui-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 25976,
+   "proposedEngineKey": "uiConfirm",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "menu confirm",
+   "gateProposal": "G.mode!=='play'",
+   "note": ""
+  },
+  {
+   "cueId": "062",
+   "manifestKey": "ui.back",
+   "tier": 6,
+   "tierName": "ui-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 25128,
+   "proposedEngineKey": "uiBack",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "menu back/cancel",
+   "gateProposal": "G.mode!=='play'",
+   "note": ""
+  },
+  {
+   "cueId": "063",
+   "manifestKey": "ui.tab",
+   "tier": 6,
+   "tierName": "ui-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 25068,
+   "proposedEngineKey": "uiTab",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "menu tab/category switch",
+   "gateProposal": "G.mode!=='play'",
+   "note": ""
+  },
+  {
+   "cueId": "064",
+   "manifestKey": "ui.disabled",
+   "tier": 6,
+   "tierName": "ui-core",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 25654,
+   "proposedEngineKey": "uiDisabled",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "disabled-control press",
+   "gateProposal": "G.mode!=='play'",
+   "note": ""
+  },
+  {
+   "cueId": "066",
+   "manifestKey": "horse.hoof.grass",
+   "tier": 5,
+   "tierName": "loop-beats",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    2,
+    3
+   ],
+   "oggBytes": 16835,
+   "proposedEngineKey": "hoof (grass sample table)",
+   "wiringClass": "EXTEND_GATE",
+   "dispatchProposal": "existing hoof dispatch",
+   "gateProposal": "surface==grass (surface flag read-only)",
+   "note": "hoof currently always hard-dirt (036); surface-keyed tables extend it."
+  },
+  {
+   "cueId": "069",
+   "manifestKey": "horse.tack",
+   "tier": 5,
+   "tierName": "loop-beats",
+   "deferredTier": false,
+   "loop": true,
+   "takes": [
+    1,
+    2
+   ],
+   "oggBytes": 66062,
+   "proposedEngineKey": "horseTack",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "mounted-movement cadence layer (short loop or retriggered one-shot while mounted)",
+   "gateProposal": "mounted state",
+   "note": ""
+  },
+  {
+   "cueId": "072",
+   "manifestKey": "horse.whinny",
+   "tier": 5,
+   "tierName": "loop-beats",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 60536,
+   "proposedEngineKey": "horseWhinny",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "horse call/return whistle response, mount",
+   "gateProposal": "",
+   "note": ""
+  },
+  {
+   "cueId": "073",
+   "manifestKey": "horse.landing",
+   "tier": 5,
+   "tierName": "loop-beats",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 36455,
+   "proposedEngineKey": null,
+   "wiringClass": "DECISION",
+   "dispatchProposal": "would collide with player land key (035)",
+   "gateProposal": null,
+   "note": "Deliberately unmapped in alpha.3.2 (mapping table GATE item 3). Needs a distinct horse-landing event or shelve."
+  },
+  {
+   "cueId": "075",
+   "manifestKey": "train.rods",
+   "tier": 7,
+   "tierName": "deferred-ambience-loops",
+   "deferredTier": true,
+   "loop": true,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 128699,
+   "proposedEngineKey": "trainRods",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "ambient emitter: engine-car proximity machinery loop",
+   "gateProposal": "loop=true; zone/proximity crossfade; tier-7 drop-first",
+   "note": "PERSISTENT_LOOP."
+  },
+  {
+   "cueId": "076",
+   "manifestKey": "train.steam-release",
+   "tier": 5,
+   "tierName": "loop-beats",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    2,
+    3
+   ],
+   "oggBytes": 49087,
+   "proposedEngineKey": "steamRelease",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "train stop/idle vents, station beats",
+   "gateProposal": "",
+   "note": ""
+  },
+  {
+   "cueId": "077",
+   "manifestKey": "train.coupler",
+   "tier": 5,
+   "tierName": "loop-beats",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    3
+   ],
+   "oggBytes": 23424,
+   "proposedEngineKey": "coupler",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "car-to-car boundary crossings / coupling moments",
+   "gateProposal": "",
+   "note": ""
+  },
+  {
+   "cueId": "078",
+   "manifestKey": "train.brake",
+   "tier": 5,
+   "tierName": "loop-beats",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 87985,
+   "proposedEngineKey": "brakeSqueal",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "train deceleration events",
+   "gateProposal": "",
+   "note": ""
+  },
+  {
+   "cueId": "079",
+   "manifestKey": "train.interior",
+   "tier": 7,
+   "tierName": "deferred-ambience-loops",
+   "deferredTier": true,
+   "loop": true,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 148213,
+   "proposedEngineKey": "trainInterior",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "ambient emitter: inside coach",
+   "gateProposal": "loop=true; interior state; tier-7 drop-first",
+   "note": "PERSISTENT_LOOP; stereo source downmixed mono."
+  },
+  {
+   "cueId": "080",
+   "manifestKey": "train.engine-proximity",
+   "tier": 7,
+   "tierName": "deferred-ambience-loops",
+   "deferredTier": true,
+   "loop": true,
+   "takes": [
+    1,
+    2
+   ],
+   "oggBytes": 65690,
+   "proposedEngineKey": "engineProximity",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "ambient layer near engine car",
+   "gateProposal": "loop=true; proximity",
+   "note": "stereo source downmixed mono."
+  },
+  {
+   "cueId": "081",
+   "manifestKey": "train.roof-wind",
+   "tier": 7,
+   "tierName": "deferred-ambience-loops",
+   "deferredTier": true,
+   "loop": true,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 143855,
+   "proposedEngineKey": "roofWind",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "ambient emitter: on train roof",
+   "gateProposal": "loop=true; roof state (ROOF_Y); tier-7 drop-first",
+   "note": "PERSISTENT_LOOP; stereo source downmixed mono."
+  },
+  {
+   "cueId": "082",
+   "manifestKey": "dynamite.fuse",
+   "tier": 3,
+   "tierName": "explosion-destruction",
+   "deferredTier": false,
+   "loop": true,
+   "takes": [
+    2,
+    3
+   ],
+   "oggBytes": 67147,
+   "proposedEngineKey": "fuse",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "dynamite armed/thrown -> lit-fuse window",
+   "gateProposal": "audio state outside sim; stop at detonation",
+   "note": "Blast itself (027) has 0 approved takes - stays procedural until Round-2 approval."
+  },
+  {
+   "cueId": "083",
+   "manifestKey": "debris.wood",
+   "tier": 3,
+   "tierName": "explosion-destruction",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 49873,
+   "proposedEngineKey": "debrisWood",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "post-explosion/destruction debris on wood structures",
+   "gateProposal": "",
+   "note": "Layer after procedural blast."
+  },
+  {
+   "cueId": "084",
+   "manifestKey": "debris.metal",
+   "tier": 3,
+   "tierName": "explosion-destruction",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 50209,
+   "proposedEngineKey": "debrisMetal",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "post-explosion debris on metal structures",
+   "gateProposal": "",
+   "note": ""
+  },
+  {
+   "cueId": "085",
+   "manifestKey": "debris.rock",
+   "tier": 3,
+   "tierName": "explosion-destruction",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 54303,
+   "proposedEngineKey": "debrisRock",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "post-explosion debris on rock",
+   "gateProposal": "",
+   "note": ""
+  },
+  {
+   "cueId": "086",
+   "manifestKey": "dynamite.tail.exterior",
+   "tier": 3,
+   "tierName": "explosion-destruction",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2
+   ],
+   "oggBytes": 53477,
+   "proposedEngineKey": "explosionTailExt",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "exterior explosion decay layer (after blast)",
+   "gateProposal": "outdoor context",
+   "note": ""
+  },
+  {
+   "cueId": "087",
+   "manifestKey": "dynamite.tail.interior",
+   "tier": 3,
+   "tierName": "explosion-destruction",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2
+   ],
+   "oggBytes": 41910,
+   "proposedEngineKey": "explosionTailInt",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "interior explosion decay layer",
+   "gateProposal": "indoor/car-interior context",
+   "note": ""
+  },
+  {
+   "cueId": "088",
+   "manifestKey": "fire.loop",
+   "tier": 3,
+   "tierName": "explosion-destruction",
+   "deferredTier": false,
+   "loop": true,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 166754,
+   "proposedEngineKey": "fireLoop",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "persistent burn state after explosion",
+   "gateProposal": "loop=true; stop on state end; voice-cap aware",
+   "note": "PERSISTENT_LOOP."
+  },
+  {
+   "cueId": "089",
+   "manifestKey": "ambience.canyon",
+   "tier": 7,
+   "tierName": "deferred-ambience-loops",
+   "deferredTier": true,
+   "loop": true,
+   "takes": [
+    1,
+    2
+   ],
+   "oggBytes": 106935,
+   "proposedEngineKey": "canyonWind",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "ambient emitter: canyon biome",
+   "gateProposal": "loop=true; zone; tier-7 drop-first",
+   "note": "PERSISTENT_LOOP; stereo source downmixed mono."
+  },
+  {
+   "cueId": "091",
+   "manifestKey": "ambience.dust-storm",
+   "tier": 7,
+   "tierName": "deferred-ambience-loops",
+   "deferredTier": true,
+   "loop": true,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 182720,
+   "proposedEngineKey": "dustStorm",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "ambient emitter: dust-storm weather state",
+   "gateProposal": "loop=true; weather; tier-7 drop-first",
+   "note": "PERSISTENT_LOOP; stereo source downmixed mono."
+  },
+  {
+   "cueId": "092",
+   "manifestKey": "world.cattle-stampede",
+   "tier": 7,
+   "tierName": "deferred-ambience-loops",
+   "deferredTier": true,
+   "loop": false,
+   "takes": [
+    1,
+    2
+   ],
+   "oggBytes": 67526,
+   "proposedEngineKey": "stampede",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "stampede set-piece / hazard event",
+   "gateProposal": "",
+   "note": "One-shot (loop:false), stereo source downmixed mono."
+  },
+  {
+   "cueId": "095",
+   "manifestKey": "interaction.safe-lock",
+   "tier": 4,
+   "tierName": "cash-payday-stingers",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 41594,
+   "proposedEngineKey": "safeLock",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "safe interaction success",
+   "gateProposal": "",
+   "note": ""
+  },
+  {
+   "cueId": "096",
+   "manifestKey": "movement.ladder-grab",
+   "tier": 5,
+   "tierName": "loop-beats",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 33815,
+   "proposedEngineKey": "ladderGrab",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "ladder mount at LADDER_X boundary",
+   "gateProposal": "",
+   "note": ""
+  },
+  {
+   "cueId": "098",
+   "manifestKey": "loot.strongbox",
+   "tier": 4,
+   "tierName": "cash-payday-stingers",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    2,
+    3
+   ],
+   "oggBytes": 26912,
+   "proposedEngineKey": "strongbox",
+   "wiringClass": "NEW_EVENT",
+   "dispatchProposal": "strongbox/gold pickup (distinct from coin/bag)",
+   "gateProposal": "G.mode==='play'",
+   "note": ""
+  },
+  {
+   "cueId": "100",
+   "manifestKey": "destruction.crate",
+   "tier": 3,
+   "tierName": "explosion-destruction",
+   "deferredTier": false,
+   "loop": false,
+   "takes": [
+    1,
+    2,
+    3
+   ],
+   "oggBytes": 39850,
+   "proposedEngineKey": null,
+   "wiringClass": "DECISION",
+   "dispatchProposal": "crate breaks currently route through wood/metal impact keys",
+   "gateProposal": null,
+   "note": "Deliberately unmapped in alpha.3.2 (mapping table GATE item 3). Needs a distinct crate-destruction event or stays on wood/metal routing."
+  }
+ ]
+}
