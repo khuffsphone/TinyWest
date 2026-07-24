@@ -76,13 +76,37 @@ still gets zero net progress from these runs beyond this file.
 
 Escalation cadence: the owner was last proactively notified about this at run 36
 (~2026-07-23 22:20 UTC). Per that cadence, re-escalate no sooner than ~24h later
-(~2026-07-24 22:20 UTC) unless something material changes first. This run
-(~2026-07-24 19:20 UTC) is still before that threshold and found nothing new
-(same repo state, same green suites, one environment-only QA deviation noted
-above) — no notification sent. Standing recommendation to the owner, unchanged:
-reduce or disable this schedule from the Claude Code web UI, or repoint it at a
-real trigger (new commits, an explicit playtest request) instead of a fixed
-hourly timer.
+(~2026-07-24 22:20 UTC) unless something material changes first. Repo substance
+itself found nothing new this run (same state, same green suites, one
+environment-only QA deviation noted above) — that alone would not have
+triggered a notification. However, this run's PR-creation failure (see section
+above) **is** material and new, so a notification was sent this pass ahead of
+the standing cadence, specifically about the PR-creation failure plus a repeat
+of the standing hourly-cadence recommendation. Standing recommendation to the
+owner, unchanged: reduce or disable this schedule from the Claude Code web UI,
+or repoint it at a real trigger (new commits, an explicit playtest request)
+instead of a fixed hourly timer.
+
+## New this pass: PR creation is failing (GitHub API)
+
+Unlike every prior run (1 through 57), this pass could **not** open a consolidating
+pull request. `create_pull_request` (owner `khuffsphone`, repo tried as both
+`tinywest` and `TinyWest`, head `claude/eager-dirac-8tpm2r`, base
+`claude/sunset-riders-clone-lyyefk`) returned a bare `500` with an empty body from
+the GitHub API on **four consecutive attempts** (varying payload size, a 20s wait
+between two of them, and both repo-name casings) — not a validation error, not a
+rate-limit (403/429), a plain server-side `500`. The commit itself pushed fine
+(`git push -u origin claude/eager-dirac-8tpm2r` succeeded normally), so this is
+specific to PR creation, not general GitHub connectivity from this session.
+
+Net effect: PR **#57 is still open** (not superseded/closed this pass, since there
+is no successor PR to point to yet), and this run's commit
+(`docs/tiny-west-brain/STATUS.md` update) sits on pushed branch
+`claude/eager-dirac-8tpm2r` with no PR wrapping it. This is a genuine new
+blocker distinct from the standing hourly-cadence issue above, and is called out
+to the owner this pass specifically because of it (see escalation note below),
+even though the 24h standing-issue cadence threshold hadn't otherwise been
+reached.
 
 ## No new Brain conflicts
 
