@@ -5,7 +5,7 @@ This folder is a **pointer index + distilled constants**, not a full mirror. The
 documents remain the source of truth. Mirroring the full text into this folder is a
 pending owner action (export from Drive).
 
-## Document inventory (verified 2026-07-17)
+## Document inventory (verified 2026-07-17; conflicts re-checked live against Drive 2026-07-26)
 
 ### Iron Trail set (underscore-named) — mechanics/technical evidence, theft-first framing
 
