@@ -52,3 +52,6 @@ asset-approval receipts; authoritative repo (ADR-003); delivery architecture (AD
 - `CONSTANTS.md` — every protected tuning value used by the slice, with sources.
 - `RECONCILIATION.md` — condensed CONFLICT-001 ruling applied to this repo.
 - `BUILD_RECEIPT_SLICE.md` — preflight report + evidence for the 42-second slice build.
+- `CONFLICT-002.md` — v6 "no-size-cap" Drive/Cowork build lane vs. this repo's 1.2 MB
+  ceiling, and the still-open `GOV-111` Drive credential item. `NEEDS_DECISION`.
+- `STATUS.md` — running log for scheduled Brain status check-ins on this repo.

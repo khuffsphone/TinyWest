@@ -24,6 +24,12 @@ numbered "Rampage Express" set. Per `11 — STATUS — Brain Reconciliation Note
   (owner-level). Do not rebrand, do not introduce runtime 3D.
 - Never silently merge the two sets; report conflicts.
 
+**CONFLICT-002 (unresolved by owner):** a separate, Drive/Cowork-only "v6 no-size-cap
+rebuild" lane (branch `v6/no-size-cap-rebuild`, not present in this repo) revokes the
+1.2 MB ceiling below *for that lane only* — no Drive document extends the revocation
+to this repo. Whether `khuffsphone/tinywest` is still canonical relative to that lane
+is `NEEDS_DECISION` (owner-level). See `docs/tiny-west-brain/CONFLICT-002.md`.
+
 ## What is in this repo
 
 | Path | What | Status |
