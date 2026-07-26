@@ -52,3 +52,8 @@ asset-approval receipts; authoritative repo (ADR-003); delivery architecture (AD
 - `CONSTANTS.md` — every protected tuning value used by the slice, with sources.
 - `RECONCILIATION.md` — condensed CONFLICT-001 ruling applied to this repo.
 - `BUILD_RECEIPT_SLICE.md` — preflight report + evidence for the 42-second slice build.
+- `CONFLICT-002.md` — **unresolved**: this repo vs. the live Drive-native "Tiny West: Iron Trail
+  v6 no-size-cap rebuild" pipeline (owner decision needed on whether this repo is still canonical).
+- `STATUS_2026-07-26.md` — latest scheduled status check-in: slice re-verification, the
+  CONFLICT-002 filing, the open GOV-111 security item, and a process-incident note on the
+  scheduled routine that filed this update (94 unmerged status PRs since 2026-07-25).
