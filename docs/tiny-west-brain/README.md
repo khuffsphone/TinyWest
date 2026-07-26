@@ -52,3 +52,8 @@ asset-approval receipts; authoritative repo (ADR-003); delivery architecture (AD
 - `CONSTANTS.md` — every protected tuning value used by the slice, with sources.
 - `RECONCILIATION.md` — condensed CONFLICT-001 ruling applied to this repo.
 - `BUILD_RECEIPT_SLICE.md` — preflight report + evidence for the 42-second slice build.
+- `CONFLICT-002.md` — **unresolved, reported 2026-07-26.** This repo has not absorbed the
+  2026-07-19 "v6 no-size-cap rebuild" governing document, which revokes the 1.2 MB ceiling this
+  repo's `CLAUDE.md`/`CONSTANTS.md` still enforce, and describes an active Drive-only build line
+  (current candidate ~4.3 MB) disconnected from this git repository. Read before trusting the byte
+  budget in `CONSTANTS.md` as current.
