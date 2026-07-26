@@ -24,6 +24,12 @@ numbered "Rampage Express" set. Per `11 — STATUS — Brain Reconciliation Note
   (owner-level). Do not rebrand, do not introduce runtime 3D.
 - Never silently merge the two sets; report conflicts.
 
+**CONFLICT-002 (new, unresolved by owner):** the Brain now shows an active "Iron Trail
+v6 no-size-cap rebuild" program (live gate ~4.46 MB) running entirely outside this repo,
+well past this repo's binding file-size cap below. Whether `khuffsphone/tinywest` is
+still canonical or a frozen 2026-07-17 prototype is `NEEDS_DECISION` (owner-level). See
+`docs/tiny-west-brain/STATUS.md`. Do not chase the v6 line here without an owner ruling.
+
 ## What is in this repo
 
 | Path | What | Status |
