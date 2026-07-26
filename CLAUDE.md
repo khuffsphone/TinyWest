@@ -24,6 +24,13 @@ numbered "Rampage Express" set. Per `11 — STATUS — Brain Reconciliation Note
   (owner-level). Do not rebrand, do not introduce runtime 3D.
 - Never silently merge the two sets; report conflicts.
 
+**CONFLICT-002 (unresolved by owner):** the Drive Brain also carries an active, external
+"v6 no-size-cap rebuild" program (effective 2026-07-19) that this repo is not part of
+and has not absorbed. Whether `khuffsphone/tinywest` is still the canonical build
+target is `NEEDS_DECISION` (owner-level). See `docs/tiny-west-brain/CONFLICT-002.md`.
+Do not treat this repo's size ceiling or closed rules below as overridden by the v6
+program absent an explicit owner ruling.
+
 ## What is in this repo
 
 | Path | What | Status |
