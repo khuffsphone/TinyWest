@@ -24,6 +24,11 @@ numbered "Rampage Express" set. Per `11 — STATUS — Brain Reconciliation Note
   (owner-level). Do not rebrand, do not introduce runtime 3D.
 - Never silently merge the two sets; report conflicts.
 
+**CONFLICT-002 (unresolved by owner):** the Brain's active "Iron Trail v6 no-size-cap
+rebuild" program (effective 2026-07-19) has revoked the 1.2 MB artifact ceiling that this
+repo still states as a closed rule below. See `docs/tiny-west-brain/CONFLICT-002.md`.
+`NEEDS_DECISION`: whether this repo remains canonical. No rule below has been changed.
+
 ## What is in this repo
 
 | Path | What | Status |
