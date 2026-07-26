@@ -24,6 +24,12 @@ numbered "Rampage Express" set. Per `11 — STATUS — Brain Reconciliation Note
   (owner-level). Do not rebrand, do not introduce runtime 3D.
 - Never silently merge the two sets; report conflicts.
 
+**CONFLICT-002 (filed 2026-07-26, unresolved by owner):** the canonical Drive Brain also runs a
+much larger, active "Tiny West: Iron Trail v6 no-size-cap rebuild" program entirely outside this
+repo (current gate 4.46 MB, 1.2 MB ceiling explicitly revoked upstream). This repo's constants
+below remain binding **here** pending an owner ruling on whether this repo is still canonical.
+See `docs/tiny-west-brain/CONFLICT-002.md`.
+
 ## What is in this repo
 
 | Path | What | Status |
