@@ -52,3 +52,13 @@ asset-approval receipts; authoritative repo (ADR-003); delivery architecture (AD
 - `CONSTANTS.md` — every protected tuning value used by the slice, with sources.
 - `RECONCILIATION.md` — condensed CONFLICT-001 ruling applied to this repo.
 - `BUILD_RECEIPT_SLICE.md` — preflight report + evidence for the 42-second slice build.
+- `STATUS_LOG.md` — running log of scheduled status check-ins. Append new entries here
+  instead of restating full findings in a fresh doc each run.
+
+## Known open item (not yet landed in this branch)
+
+`CONFLICT-002` (canonical Drive Brain revoked the 1.2 MB artifact ceiling on 2026-07-19
+and opened an active "v6 no-size-cap rebuild" program outside this repo) was surfaced in
+PRs #87 and #88 against this repo but neither is merged as of this writing, so
+`CONFLICT-002.md` does not exist in this checkout yet. See `STATUS_LOG.md` for details.
+Merge one of those PRs (or get an owner ruling) rather than re-filing a third copy.
