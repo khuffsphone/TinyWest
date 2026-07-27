@@ -52,3 +52,7 @@ asset-approval receipts; authoritative repo (ADR-003); delivery architecture (AD
 - `CONSTANTS.md` — every protected tuning value used by the slice, with sources.
 - `RECONCILIATION.md` — condensed CONFLICT-001 ruling applied to this repo.
 - `BUILD_RECEIPT_SLICE.md` — preflight report + evidence for the 42-second slice build.
+- `CONFLICT-002.md` — repo canonical status vs. the live Drive "Iron Trail v6" build
+  line (unresolved, owner-level).
+- `STATUS_2026-07-27.md` — latest scheduled check-in: slice health, CONFLICT-002,
+  live credential exposure, PR-cadence note.
