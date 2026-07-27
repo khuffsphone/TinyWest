@@ -24,6 +24,15 @@ numbered "Rampage Express" set. Per `11 — STATUS — Brain Reconciliation Note
   (owner-level). Do not rebrand, do not introduce runtime 3D.
 - Never silently merge the two sets; report conflicts.
 
+**Authority conflict notice (CONFLICT-002, unresolved by owner):** the canonical Drive
+Brain shows an active "Tiny West: Iron Trail v6" build line (`00_V6_START_HERE_CURRENT.md`,
+effective 2026-07-19) that **revoked** this repo's "< 1.2 MB preferred" ceiling; the
+live gate candidate there is ~4.46 MB. This repo has had no commits since 2026-07-17 and
+its docs still enforce the old ceiling. See `docs/tiny-west-brain/CONFLICT-002.md`.
+**`NEEDS_DECISION` (owner-level):** is `khuffsphone/tinywest` still canonical, or a
+frozen 2026-07-17 prototype the project has moved past? Do not reconcile the two build
+lines or change the size ceiling without an explicit owner ruling — report, don't merge.
+
 ## What is in this repo
 
 | Path | What | Status |
