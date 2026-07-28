@@ -24,6 +24,13 @@ numbered "Rampage Express" set. Per `11 — STATUS — Brain Reconciliation Note
   (owner-level). Do not rebrand, do not introduce runtime 3D.
 - Never silently merge the two sets; report conflicts.
 
+**Authority conflict notice (CONFLICT-002, unresolved by owner):** an actively-developed
+external "Iron Trail v6" rebuild program is running in the same Brain folder, well past
+this repo's 1.2 MB/2.5 MB size ceiling and 2026-07-17 slice snapshot. Whether this repo
+is still the canonical build target is `NEEDS_DECISION` (owner-level). See
+`docs/tiny-west-brain/CONFLICT-002.md`. Do not adopt that program's scale/decisions here
+without an explicit owner ruling.
+
 ## What is in this repo
 
 | Path | What | Status |
@@ -58,8 +65,13 @@ See `docs/tiny-west-brain/CONSTANTS.md`. Change only with evidence + a decision 
 
 ## Build & test (slice)
 
+`slice/package.json` pins the `playwright` devDependency the test scripts need
+(`npm install` inside `slice/` once per clean checkout; browser binaries are
+provided by the environment, not downloaded).
+
 ```sh
 cd slice
+npm install                     # once per clean checkout — installs playwright
 node tools/sprites.mjs preview   # regenerate + preview atlas (tools/previews/atlas.png)
 node tools/sprites.mjs emit      # write src/atlas.gen.js
 node tools/build.mjs             # write dist/tiny-west.html
