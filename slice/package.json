@@ -1,0 +1,16 @@
+{
+  "name": "tiny-west-slice",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sprites:preview": "node tools/sprites.mjs preview",
+    "sprites:emit": "node tools/sprites.mjs emit",
+    "build": "node tools/build.mjs",
+    "playtest": "node tools/playtest.mjs",
+    "qa2": "node tools/qa2.mjs",
+    "qa3": "node tools/qa3.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}
