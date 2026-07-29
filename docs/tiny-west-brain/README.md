@@ -52,3 +52,7 @@ asset-approval receipts; authoritative repo (ADR-003); delivery architecture (AD
 - `CONSTANTS.md` — every protected tuning value used by the slice, with sources.
 - `RECONCILIATION.md` — condensed CONFLICT-001 ruling applied to this repo.
 - `BUILD_RECEIPT_SLICE.md` — preflight report + evidence for the 42-second slice build.
+- `STATUS.md` — running log of scheduled status check-ins (build/QA re-verification,
+  GOV-111 and CONFLICT-002 carry-forward, repo/PR backlog notes).
+- `CONFLICT-002.md` — external v6 rebuild program vs. this repo's canonicality,
+  owner-level `NEEDS_DECISION`.
